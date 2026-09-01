@@ -155,7 +155,7 @@
      Paste this block just before </body> on every page.
      Canned/scripted flow only — no AI backend, no API key.
      On completion, sends the lead to Eric two ways:
-       1) Email via Formspree   (see FORM_ENDPOINT below)
+       1) Email via Formspree   (see DW_FORM_ENDPOINT below)
        2) Instant text via Twilio, through a Netlify Function
           (see netlify/functions/notify-daley-lead.js)
 ══════════════════════════════════════════════════════════ -->
@@ -235,8 +235,8 @@
 <script>
 (function(){
   // ── CONFIG — swap these before going live ──
-  var FORM_ENDPOINT = "https://formspree.io/f/xnpqdnlo"; // same Formspree form as contact.html — each lead includes source:"Website chatbot" so Eric can tell them apart in the inbox
-  var SMS_FUNCTION_ENDPOINT = "/.netlify/functions/notify-daley-lead"; // relative — works automatically once deployed on Netlify
+  var DW_FORM_ENDPOINT = "https://formspree.io/f/xnpqdnlo"; // same Formspree form as contact.html — each lead includes source:"Website chatbot" so Eric can tell them apart in the inbox
+  var DW_SMS_FUNCTION_ENDPOINT = "/.netlify/functions/notify-daley-lead"; // relative — works automatically once deployed on Netlify
 
   var flow = [
     { bot: "Hey there, neighbor! \ud83d\udc4b Welcome to Daley Roofing & Construction \u2014 proudly serving Southeastern PA, Northern DE, and South Jersey. I'm here 24 hours a day so you never have to wait. Are you a new or returning customer?",
@@ -378,7 +378,7 @@
     };
 
     // 1) Email via Formspree — searchable record
-    fetch(FORM_ENDPOINT, {
+    fetch(DW_FORM_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(lead)
@@ -389,7 +389,7 @@
     // will reliably deliver. Re-enable by uncommenting below once that's done
     // and notify-daley-lead.js is deployed with real Twilio env vars set.
     /*
-    fetch(SMS_FUNCTION_ENDPOINT, {
+    fetch(DW_SMS_FUNCTION_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(lead)
