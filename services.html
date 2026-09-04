@@ -80,9 +80,29 @@
   .site-footer a { color: var(--blue-lt); }
 
   .mobile-toggle { display:none; }
+  .mobile-drawer {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0; z-index:999;
+    background: rgba(10,31,61,0.6);
+  }
+  .mobile-drawer.open { display:block; }
+  .mobile-drawer-panel {
+    background: var(--navy-dark); width:78%; max-width:320px; height:100%;
+    padding: 1.5rem 1.2rem; box-shadow: 4px 0 24px rgba(0,0,0,0.3);
+    display:flex; flex-direction:column;
+  }
+  .mobile-drawer-close {
+    align-self:flex-end; background:none; border:none; color:white; padding:0.4rem;
+  }
+  .mobile-drawer ul { list-style:none; margin-top:1rem; }
+  .mobile-drawer ul li a {
+    display:block; color:rgba(255,255,255,0.92); text-decoration:none;
+    font-size:1rem; font-weight:600; padding:0.9rem 0.3rem; border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .mobile-drawer ul li a.active { color:var(--blue-lt); }
   @media (max-width: 980px) {
     .mainnav-links { display:none; }
     .topbar-info { display:none; }
+    .mobile-toggle { display:flex; margin-left:auto; background:none; color:var(--white); padding:0.6rem; }
   }
 </style>
 
@@ -125,8 +145,31 @@
       <li><a href="service-areas.html">Service Areas</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <button class="mobile-toggle" aria-label="Open menu" onclick="document.getElementById('mobileDrawer').classList.add('open')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="mobile-drawer-panel">
+    <button class="mobile-drawer-close" aria-label="Close menu" onclick="document.getElementById('mobileDrawer').classList.remove('open')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="residential.html">Residential</a></li>
+      <li><a href="commercial.html">Commercial</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+      <li><a href="service-areas.html">Service Areas</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</div>
 <div class="page-head">
   <div class="page-head-inner">
     <div class="page-eyebrow">Our Services</div>
